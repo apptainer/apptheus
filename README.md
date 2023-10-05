@@ -28,3 +28,8 @@ GET /metrics
 
 https://github.com/JasonYangShadow/apptheus/assets/2051711/b33c5f20-a030-4b91-a6a7-bc62fe1fc6b8
 
+
+## Important Opts
+1. `--socket.path="/run/apptheus/gateway.sock"`, local socket path for verification. Default value is `/run/apptheus/gateway.sock`.
+2. `--trust.path=""`, multiple trusted program paths separated using ';', for exmaple, for apptainer starter, the path usually is `/usr/local/libexec/apptainer/bin/starter` .
+3. `--monitor.inverval=0.5s`, cgroup stat sample interval.
