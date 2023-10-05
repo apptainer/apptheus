@@ -1,0 +1,10 @@
+/apptheus
+/.build
+/.release
+/.tarballs
+*.test
+*~
+*.exe
+*.tar.gz
+/vendor
+/testutil/main/main

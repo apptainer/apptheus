@@ -1,0 +1,62 @@
+linters:
+  enable-all: true
+  disable:
+    - maligned
+    - interfacer
+    - scopelint
+    - golint
+    - dupl
+    - funlen
+    - gomnd
+    - lll
+    - gochecknoglobals
+    - varnamelen
+    - ireturn
+    - gomoddirectives
+    - godox
+    - gocyclo
+    - exhaustivestruct
+    - exhaustruct
+    - tagliatelle
+    - wsl
+    - forbidigo
+    - makezero
+    - depguard
+    - wrapcheck
+    - gocritic
+    - gci
+    - godot 
+    - cyclop 
+    - gocognit 
+    - maintidx 
+    - goerr113 
+    - errname 
+    - nilnil 
+    - prealloc 
+    - ifshort 
+    - nlreturn 
+    - exhaustive 
+    - nestif 
+    - forcetypeassert 
+    - containedctx 
+    - contextcheck 
+    - wastedassign 
+    - promlinter 
+    - nonamedreturns
+    - nosnakecase 
+    - gochecknoinits
+    - goconst
+    - goheader
+    - paralleltest
+    - errcheck
+    - thelper
+    - usestdlibvars
+
+linters-settings:
+  goheader:
+    values:
+      const:
+        COMPANY: CIQ, Inc
+    template: |-
+      SPDX-FileCopyrightText: Copyright (c) {{ YEAR-RANGE }}, {{ COMPANY }}. All rights reserved
+      SPDX-License-Identifier: Apache-2.0

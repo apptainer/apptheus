@@ -1,0 +1,27 @@
+name: license-check
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  license-check:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v4
+        - name: Setup Go
+          uses: actions/setup-go@v4
+          with:
+            go-version: '1.21.x'
+        - name: Install dependencies
+          run: go get .
+        - name: Install go-license
+          run: go install github.com/google/go-licenses@latest
+        - name: Check license
+          run: go-licenses check --include_tests github.com/jasonyangshadow/apptheus...

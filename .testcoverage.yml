@@ -1,0 +1,28 @@
+# (mandatory) 
+# Path to coverprofile file (output of `go test -coverprofile` command)
+profile: cover.out
+
+# Holds coverage thresholds percentages, values should be in range [0-100]
+threshold:
+  # (optional; default 0) 
+  # The minimum coverage that each file should have
+  file: 80
+
+  # (optional; default 0) 
+  # The minimum coverage that each package should have
+  package: 80
+
+  # (optional; default 0) 
+  # The minimum total coverage project should have
+  total: 80
+
+#override:
+  # Increase coverage threshold to 100% for `foo` package (default is 80, as configured above)
+  #- threshold: 100
+  #  path: ^pkg/lib/foo$
+
+# Holds regexp rules which will exclude matched files or packages from coverage statistics
+exclude:
+  # Exclude files or packages matching their paths
+  paths:
+    - ^storage/interface

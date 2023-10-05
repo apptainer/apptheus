@@ -1,0 +1,45 @@
+@startuml apptainer
+participant Apptainer
+participant Apptheus
+participant Cgroup
+
+== Apptheus Initialization ==
+    activate Apptheus #Red
+    Apptheus -> Apptheus: Socket creation & Metrics endpoints expose
+
+== Apptainer Container Creation ==
+
+    activate Apptainer #Green
+    Apptainer -> Apptheus: SO_PEERCRED verification request via socket
+    Apptheus -> Apptheus: Retrieve the caller PID info \nand verifies caller info against\n --trust.path
+
+    alt #Pink Failure
+        Apptheus ->x Apptainer: Connection refused
+    else #Cyan Success
+        Apptheus -> Apptainer: Connection established
+        Apptainer -> Apptainer: Save the socket connection
+
+        Group Cgroup manipulation
+            Apptheus -> Cgroup: Create sub-group under \nmetric-gateway group
+            Apptheus -> Cgroup: Request to move caller process \ninto the newly created sub-group
+            note left: the caller \nactually is \nstarter (starter-suid)
+            Apptheus -> Apptheus: Launch a monitor goroutine
+            loop every 500ms (configurable)
+                Apptheus -> Cgroup: Check whether there are any processes running
+                Apptheus <- Cgroup: PIDs data
+                Apptheus -> Apptheus: If no processes are live, monitor routine \nwill exit (close the socket connection)
+                Apptheus -> Cgroup: Retrieve sub-group stats
+                Apptheus <- Cgroup: Stats data
+                Apptheus -> Apptheus: Push metrics into storage
+            end
+        end
+    end
+
+
+== Apptainer Container Cleanup ==
+
+    Apptainer -> Apptainer: Close the saved socket connection
+    deactivate Apptainer
+
+    deactivate Apptheus
+@enduml
