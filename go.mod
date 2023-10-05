@@ -12,7 +12,7 @@ require (
 	github.com/prometheus/client_model v0.4.1-0.20230718164431-9a2bf3000d16
 	github.com/prometheus/common v0.44.0
 	github.com/prometheus/exporter-toolkit v0.10.0
-	golang.org/x/sys v0.11.0
+	golang.org/x/sys v0.12.0
 	toolman.org/net/peercred v0.6.1
 )
 
