@@ -1,4 +1,4 @@
-module github.com/jasonyangshadow/apptheus
+module github.com/apptainer/apptheus
 
 go 1.21
 

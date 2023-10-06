@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"time"
 
+	"github.com/apptainer/apptheus/internal/cgroup"
+	"github.com/apptainer/apptheus/internal/cgroup/parser"
+	"github.com/apptainer/apptheus/internal/push"
+	"github.com/apptainer/apptheus/storage"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
-	"github.com/jasonyangshadow/apptheus/internal/cgroup"
-	"github.com/jasonyangshadow/apptheus/internal/cgroup/parser"
-	"github.com/jasonyangshadow/apptheus/internal/push"
-	"github.com/jasonyangshadow/apptheus/storage"
 )
 
 type Instance struct {

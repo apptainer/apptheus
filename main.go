@@ -47,9 +47,9 @@ import (
 	dto "github.com/prometheus/client_model/go"
 	promlogflag "github.com/prometheus/common/promlog/flag"
 
-	"github.com/jasonyangshadow/apptheus/internal/network"
-	"github.com/jasonyangshadow/apptheus/internal/util"
-	"github.com/jasonyangshadow/apptheus/storage"
+	"github.com/apptainer/apptheus/internal/network"
+	"github.com/apptainer/apptheus/internal/util"
+	"github.com/apptainer/apptheus/storage"
 	"toolman.org/net/peercred"
 )
 

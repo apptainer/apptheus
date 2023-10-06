@@ -7,7 +7,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/jasonyangshadow/apptheus/storage"
+	"github.com/apptainer/apptheus/storage"
 	"github.com/prometheus/common/expfmt"
 )
 

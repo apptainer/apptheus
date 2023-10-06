@@ -6,7 +6,7 @@ A redesigned Prometheus Pushgateway for ephemeral and batch jobs.
 To provide a unified way of collecting the Apptainer stats data. We plan to employ the cgroup feature, which requires putting starter (starter-suid) program under a created
 sub cgroup so that container stats can be collected and visualized.
 
-To collect the cgroup stats, we are planning to deeply custormize the [Pushgateway](https://github.com/jasonyangshadow/apptheus) tool, tailing features and adding additional security policy. We call this tool `Apptheus`, meaning Apptainer links to Prometheus.
+To collect the cgroup stats, we are planning to deeply custormize the [Pushgateway](https://github.com/apptainer/apptheus) tool, tailing features and adding additional security policy. We call this tool `Apptheus`, meaning Apptainer links to Prometheus.
 
 > Note that this tool can be used for monitoring any programs, this tool comes from the development of one Apptainer RFE.
 
@@ -26,7 +26,7 @@ GET /metrics
 ### Apptainer uses Apptheus
 ![workflow](doc/apptainer.png)
 
-https://github.com/JasonYangShadow/apptheus/assets/2051711/b33c5f20-a030-4b91-a6a7-bc62fe1fc6b8
+https://github.com/apptainer/apptheus/assets/2051711/b33c5f20-a030-4b91-a6a7-bc62fe1fc6b8
 
 
 ## Important Opts
