@@ -1,12 +1,12 @@
 # Apptheus
 
-Apptainer connects Prometheus. A redesigned Prometheus Pushgateway for short-lived jobs.
+Apptainer connects Prometheus. A redesigned Prometheus Pushgateway collecting cgroup metrics.
 
 ## Background
 Prometheus is an open source metrics collections and monitoring tool that is widely adopted.
-> Note: Promethuesnly supports pull model, meaning that Promethues will regularly (`scrape_interval = x`) pull data from metrics sources. If users want to push data to Prometheus, then metric cache components, such as Pushgateway, is needed. See [https://prometheus.io/blog/2016/07/23/pull-does-not-scale-or-does-it/](https://prometheus.io/blog/2016/07/23/pull-does-not-scale-or-does-it/).
+> Note: Promethues only supports pull model, meaning that Promethues will regularly (`scrape_interval = x`) pull data from metrics sources. If users want to push data to Prometheus, then metric cache components, such as Pushgateway, is needed. See [https://prometheus.io/blog/2016/07/23/pull-does-not-scale-or-does-it/](https://prometheus.io/blog/2016/07/23/pull-does-not-scale-or-does-it/).
 
-Pushgateway acts as a bridge (metric caches, metric sources) to Prometheus targeting at the metrics collection for `short-lived (ephemeral) jobs`. Unlike the normal jobs that Prometheus can easily collect metrics from, short-lived jobs require more flexiable way to push metrics. Pushgateway provides such push and pull features. Any tools can easily push their metrics to it, at the same time, Prometheus can pull metrics data from it. 
+Pushgateway acts as a bridge (metric caches, metric sources) to Prometheus targeting at the support of both push and pull metrics. For those `short-lived jobs` or `jobs that can not expose metrics themselves`. Pushgateway provides an easy way (http rest endpoints) to receive metrics from such jobs, at the same time, Prometheus can pull metrics data from Pushgateway and use it as the metric source.
 
 > Pushgateway acts a bit of similar to Prometheus exporters [https://prometheus.io/docs/instrumenting/exporters/](https://prometheus.io/docs/instrumenting/exporters/), but Pushgateway is more general and can receive pushed metrics, while exporters are more specialized and do not support pushing metrics.
 
@@ -22,20 +22,25 @@ When we are thinking to collect metrics from Apptainer, several requirements sho
 3. Security. Customized security policy that can help verify whether the caller is trusted.
 4. Customized push policy. Can freely configure the push interval to sample container metrics.
 
-To provide a unified way of collecting the Apptainer stats data. We need to put starter (starter-suid) program under a created
-sub cgroup so that container stats can be collected and visualized. To collect the cgroup stats, we deeply custormized the [Pushgateway](https://github.com/apptainer/apptheus) tool, tailing features and adding additional security policy. We call this new created tool `Apptheus`, meaning Apptainer links to Prometheus.
-
+To collect Apptainer containers stats data, for each created container the starter (starter-suid) process should be put into a newly created
+sub cgroup so that cgroup stats can be collected and visualized.
 > Note that this tool can be used for monitoring any programs, this tool comes from the development of one Apptainer RFE.
 
-## Features
-1. Disabled the default Pushgateway's push endpoints for security purpose, so users can not directly push the data to Apptheus. Push can only be called via internal function calls.
-2. Added a customized verification step, any incoming request through a unix socket will be verified (Check whether the process is trusted one).
-3. Apptheus can manipulate the cgroup and put the process into a newly created cgroup sub group and collect cgroup stat.
-4. The only available endpoint is:
+## Changes
+1. Disabled the default Pushgateway's endpoints for security purpose, so users can not directly push the data to Apptheus. Push can only be called via internal function calls.
+2. Any connections through the verification unix socket will be verified (Check whether the process is trusted).
+3. Apptheus can manipulate the cgroup, create new cgroup, add a process into cgroup, remove cgroup and also collect cgroup stats.
+4. Apptheus will actively monitor the cgroup stats and save the collected stats data.
+5. The only available endpoint is:
 ```
 GET /metrics
 ```
 > Note that Apptheus should be started with privileges, which means the unix socket created by Apptheus is also privileged, so during the implementation, the permission of this newly created unix socket is changed to `0o777`, that is also the reason why we need to do additional security check, i.e., checking whether the program is trusted.
+
+## Differences between Apptheus and Pushgateway
+1. Pushgateway mainly works in passive mode, waiting for applications to push metrics. While Apptheus actively monitors the cgroup stats and pushes metrics to itself. In terms of metrics expose for Prometheus, they both work in the same way, i.e., exposing `/metrics` endpoint to Prometheus.
+2. Pushgateway receives push requests from http endpoints. Apptheus does not receive push requests, Apptheus itself will add the process into a newly created cgroup and collect the cgroup stats.
+3. Apptheus receives verification through local socket, and verifies the process using its pid and `--trust.path` options. While Pushgateway use http tls.
 
 ## Apptainer uses Apptheus
 
