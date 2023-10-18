@@ -40,7 +40,7 @@ func (c *CGroup) CreateStats() ([]parser.StatFunc, error) {
 	}
 
 	statManager := &parser.StatManager{Stats: stat}
-	statManager.WithCPU().WithMemory().WithMemorySwap().WithMemoryKernel().WithPid()
+	statManager.WithCPU().WithMemory().WithMemorySwap().WithPid()
 	return statManager.All(), nil
 }
 

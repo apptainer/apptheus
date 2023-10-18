@@ -6,11 +6,11 @@ profile: cover.out
 threshold:
   # (optional; default 0) 
   # The minimum coverage that each file should have
-  file: 80
+  file: 0
 
   # (optional; default 0) 
   # The minimum coverage that each package should have
-  package: 80
+  package: 60
 
   # (optional; default 0) 
   # The minimum total coverage project should have

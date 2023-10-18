@@ -9,7 +9,7 @@ import (
 	"github.com/apptainer/apptheus/internal/cgroup"
 	"github.com/apptainer/apptheus/internal/cgroup/parser"
 	"github.com/apptainer/apptheus/internal/push"
-	"github.com/apptainer/apptheus/storage"
+	"github.com/apptainer/apptheus/internal/storage"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )
