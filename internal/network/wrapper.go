@@ -13,7 +13,7 @@ import (
 
 	"github.com/apptainer/apptheus/internal/cgroup/parser"
 	"github.com/apptainer/apptheus/internal/monitor"
-	"github.com/apptainer/apptheus/storage"
+	"github.com/apptainer/apptheus/internal/storage"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	"github.com/prometheus/exporter-toolkit/web"

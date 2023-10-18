@@ -48,8 +48,8 @@ import (
 	promlogflag "github.com/prometheus/common/promlog/flag"
 
 	"github.com/apptainer/apptheus/internal/network"
+	"github.com/apptainer/apptheus/internal/storage"
 	"github.com/apptainer/apptheus/internal/util"
-	"github.com/apptainer/apptheus/storage"
 	"toolman.org/net/peercred"
 )
 

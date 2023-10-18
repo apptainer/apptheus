@@ -35,7 +35,7 @@ import (
 
 	dto "github.com/prometheus/client_model/go"
 
-	"github.com/apptainer/apptheus/testutil"
+	"github.com/apptainer/apptheus/internal/testutil"
 )
 
 var (
