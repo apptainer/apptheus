@@ -19,16 +19,16 @@ func TestParser(t *testing.T) {
 	require.Len(t, allFuncs, 5)
 
 	usage := allFuncs[0]()
-	require.Equal(t, 0.0, usage["cpu_usage"])
+	require.Equal(t, 0.0, usage["cpu_usage_per"])
 
 	usage = allFuncs[1]()
-	require.Equal(t, 0.0, usage["memory_usage"])
+	require.Equal(t, 0.0, usage["memory_usage_per"])
 
 	usage = allFuncs[2]()
-	require.Equal(t, 0.0, usage["memory_swap_usage"])
+	require.Equal(t, 0.0, usage["memory_swap_usage_per"])
 
 	usage = allFuncs[3]()
-	require.Equal(t, 0.0, usage["pid_usage"])
+	require.Equal(t, 0.0, usage["pid_usage_per"])
 
 	usage = allFuncs[4]()
 	require.Equal(t, 0.0, usage["blkio_read"])
