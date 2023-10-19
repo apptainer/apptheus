@@ -49,7 +49,11 @@ func (s *StatManager) WithCPU() *StatManager {
 		// update the saved metrics
 		s.prevTime = curTime
 		s.prevCPU = curCPU
-		return map[string]float64{"cpu_usage": cpuPercent}
+		return map[string]float64{
+			"cpu_usage_per": cpuPercent,
+			"cpu_prevTime":  float64(s.prevTime),
+			"cpu_prevCpu":   float64(s.prevCPU),
+		}
 	})
 }
 
@@ -70,7 +74,11 @@ func (s *StatManager) WithMemory() *StatManager {
 		if memLimit != 0 {
 			memPercent = float64(memUsage) / float64(memLimit) * 100.0
 		}
-		return map[string]float64{"memory_usage": memPercent}
+		return map[string]float64{
+			"memory_usage_per": memPercent,
+			"memory_usage":     float64(memUsage),
+			"memory_limit":     float64(memLimit),
+		}
 	})
 }
 
@@ -91,7 +99,11 @@ func (s *StatManager) WithMemorySwap() *StatManager {
 		if swapLimit != 0 {
 			swapPercent = float64(swapUsage) / float64(swapLimit) * 100.0
 		}
-		return map[string]float64{"memory_swap_usage": swapPercent}
+		return map[string]float64{
+			"memory_swap_usage_per": swapPercent,
+			"memory_swap":           float64(swapUsage),
+			"memory_swap_limit":     float64(swapLimit),
+		}
 	})
 }
 
@@ -104,7 +116,11 @@ func (s *StatManager) WithPid() *StatManager {
 		if pidLimit != 0 {
 			pidPercent = float64(pidUsage) / float64(pidLimit) * 100.0
 		}
-		return map[string]float64{"pid_usage": pidPercent}
+		return map[string]float64{
+			"pid_usage_per": pidPercent,
+			"pid_usage":     float64(pidUsage),
+			"pid_limit":     float64(pidLimit),
+		}
 	})
 }
 
