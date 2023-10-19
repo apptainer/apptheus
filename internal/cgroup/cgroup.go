@@ -40,7 +40,7 @@ func (c *CGroup) CreateStats() ([]parser.StatFunc, error) {
 	}
 
 	statManager := &parser.StatManager{Stats: stat}
-	statManager.WithCPU().WithMemory().WithMemorySwap().WithPid()
+	statManager.WithCPU().WithMemory().WithMemorySwap().WithPid().WithBlkIO()
 	return statManager.All(), nil
 }
 
@@ -52,8 +52,9 @@ func (c *CGroup) Marshal(buffer *bytes.Buffer) (*bytes.Buffer, error) {
 
 	// write stats
 	for _, stat := range stats {
-		key, val := stat()
-		fmt.Fprintf(buffer, "%s %f\n", key, val)
+		for k, v := range stat() {
+			fmt.Fprintf(buffer, "%s %f\n", k, v)
+		}
 	}
 
 	return buffer, nil

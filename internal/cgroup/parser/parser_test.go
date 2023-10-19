@@ -15,18 +15,22 @@ func TestParser(t *testing.T) {
 	}
 
 	require.NotNil(t, mgr)
-	allFuncs := mgr.WithCPU().WithMemory().WithMemorySwap().WithPid().All()
-	require.Len(t, allFuncs, 4)
+	allFuncs := mgr.WithCPU().WithMemory().WithMemorySwap().WithPid().WithBlkIO().All()
+	require.Len(t, allFuncs, 5)
 
-	_, usage := allFuncs[0]()
-	require.Equal(t, 0.0, usage)
+	usage := allFuncs[0]()
+	require.Equal(t, 0.0, usage["cpu_usage"])
 
-	_, usage = allFuncs[1]()
-	require.Equal(t, 0.0, usage)
+	usage = allFuncs[1]()
+	require.Equal(t, 0.0, usage["memory_usage"])
 
-	_, usage = allFuncs[2]()
-	require.Equal(t, 0.0, usage)
+	usage = allFuncs[2]()
+	require.Equal(t, 0.0, usage["memory_swap_usage"])
 
-	_, usage = allFuncs[3]()
-	require.Equal(t, 0.0, usage)
+	usage = allFuncs[3]()
+	require.Equal(t, 0.0, usage["pid_usage"])
+
+	usage = allFuncs[4]()
+	require.Equal(t, 0.0, usage["blkio_read"])
+	require.Equal(t, 0.0, usage["blkio_write"])
 }

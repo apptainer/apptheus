@@ -79,7 +79,7 @@ func TestCgroup(t *testing.T) {
 	funcs, err := cgroup.CreateStats()
 	require.NoError(t, err)
 	require.NotEmpty(t, funcs)
-	require.Len(t, funcs, 4)
+	require.Len(t, funcs, 5)
 
 	var buffer bytes.Buffer
 	_, err = cgroup.Marshal(&buffer)
