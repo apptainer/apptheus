@@ -14,7 +14,7 @@ import (
 )
 
 type Marshal interface {
-	Marshal(*bytes.Buffer) (*bytes.Buffer, error)
+	Marshal(buffer *bytes.Buffer) (*bytes.Buffer, error)
 }
 
 type StatManager struct {

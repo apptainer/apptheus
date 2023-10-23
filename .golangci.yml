@@ -51,6 +51,10 @@ linters:
     - errcheck
     - thelper
     - usestdlibvars
+    - deadcode
+    - varcheck
+    - structcheck
+    - protogetter
 
 linters-settings:
   goheader:
