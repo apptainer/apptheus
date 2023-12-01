@@ -13,7 +13,7 @@ require (
 	github.com/prometheus/common v0.45.0
 	github.com/prometheus/exporter-toolkit v0.10.0
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/sys v0.13.0
+	golang.org/x/sys v0.15.0
 	toolman.org/net/peercred v0.6.1
 )
 
