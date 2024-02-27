@@ -55,6 +55,7 @@ linters:
     - varcheck
     - structcheck
     - protogetter
+    - perfsprint
 
 linters-settings:
   goheader:
