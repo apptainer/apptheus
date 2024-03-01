@@ -8,7 +8,7 @@ require (
 	github.com/golang/protobuf v1.5.3
 	github.com/golang/snappy v0.0.4
 	github.com/opencontainers/runc v1.1.12
-	github.com/prometheus/client_golang v1.18.0
+	github.com/prometheus/client_golang v1.19.0
 	github.com/prometheus/client_model v0.5.0
 	github.com/prometheus/common v0.48.0
 	github.com/prometheus/exporter-toolkit v0.11.0
